@@ -1,6 +1,6 @@
 
 
-const postNotesReducer = (state = { postNotes: [] }, action) => {
+export const postNotesReducer = (state = { postNotes: [] }, action) => {
     switch (action.type) {
         case 'ADD_NOTE':
             return { postNotes : state.postNotes.concat(action.payload) }
@@ -11,4 +11,12 @@ const postNotesReducer = (state = { postNotes: [] }, action) => {
     }
 };
 
-export default postNotesReducer;
+
+export const userOptReducer = (state = {users:[]},action)=>{
+    switch(action.type){
+        case "NEW_USER":
+            return {users:state.users.concat(action.payload)}
+        default:
+            return state;   
+    }
+}

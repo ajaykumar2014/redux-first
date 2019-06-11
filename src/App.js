@@ -6,14 +6,16 @@ import TextNoteBook from './components/TextNoteBook'
 import NoteList from './components/NoteList'
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import postNotesReducer from './reducers/index'
+import {postNotesReducer,userOptReducer} from './reducers/index'
 import counterReducer from './reducers/counterReducer'
 import { composeWithDevTools } from 'redux-devtools-extension';
+import TableContainer from './containers/TableContainer'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
 const reducer = combineReducers({
   counterReducer: counterReducer,
-  posts: postNotesReducer
+  posts: postNotesReducer,
+  users:userOptReducer
 });
 
 const store = createStore(reducer, composeWithDevTools());
@@ -24,6 +26,11 @@ function App() {
         <div className="row">
           <div className="col">
             <Counter />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <TableContainer />
           </div>
         </div>
         <div className="row">

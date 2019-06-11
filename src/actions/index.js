@@ -1,5 +1,16 @@
 import uuidv4 from 'uuid/v4';
 
+
+export const addNewUser = (user) =>{
+    return {
+        type:"NEW_USER",payload:{
+            id:uuidv4(),
+            name:user.name,
+            email:user.email    
+        }
+    }
+}
+
 export const addNotes = (notesText) =>{
     return {
         type:"ADD_NOTE",
