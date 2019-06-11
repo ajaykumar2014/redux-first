@@ -17,6 +17,7 @@ function Table(headerInfo, rowData) {
             <div className="container">
                     <div className="row" style={style}>
                         {headerInfo}
+                        <div className="col-sm" scope="col">Action</div>
                     </div>
                 
                     <div class="w-100"></div>
@@ -27,11 +28,11 @@ function Table(headerInfo, rowData) {
         )
     }
 }
-const TableSheet = ({ dataSet }) => {
-    let rowData = dataSet.length !== 0 ? dataSet.map(data => (<Row row={data} key={data.id} />)) : null;
+const TableSheet = ({ dataSet,onDelete }) => {
+    let rowData = dataSet.length !== 0 ? dataSet.map(data => (<Row row={data} key={data.id} onDelete = { onDelete }/>)) : null;
     console.log()
     let headerInfo = dataSet.length === 0 ? null : Object.keys(dataSet[0]).map(d => (<div className="col-sm" key={d} scope="col">{d}</div>));
-
+    
     return (Table(headerInfo, rowData));
 }
 

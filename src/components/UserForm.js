@@ -2,36 +2,43 @@
 import { connect } from 'react-redux'
 import React from 'react'
 import { TextField } from './index'
-import {addNewUser} from './../actions/index'
+import { addNewUser } from './../actions/index'
 
 class UserForm extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state={
-            newuser:{
-                name:null,
-                email:null
-            },
-            users:[]
+        this.state = {
+            newuser: {
+                id:1,
+                name: null,
+                email: null
+            }
         }
     }
 
-    userFormSubmitHandler = (e) =>{
+    userFormSubmitHandler = (e) => {
         e.preventDefault()
-        console.log("Console ===="+this.state.newuser)
+        
+        this.setState({
+            newuser: { ...this.state.newuser, id: this.state.newuser.id + 1 }
+        })
+        console.log("Console ====" + this.state.newuser.id)
         this.props.userFormSubmit(this.state.newuser);
     }
 
-    userNameHandler = (e)=>{
+    userNameHandler = (e) => {
+        let newName = e.target.value;
+
         this.setState({
-            newuser : {...this.state.newuser,name:e.target.value}
+            newuser: { ...this.state.newuser, name: newName }
         })
+
     }
 
-    userEmailHandler = (e)=>{
+    userEmailHandler = (e) => {
         this.setState({
-            newuser : {...this.state.newuser,email:e.target.value}
+            newuser: { ...this.state.newuser, email: e.target.value }
         })
     }
 
@@ -43,14 +50,14 @@ class UserForm extends React.Component {
                     <h3 className="card-title"></h3>
                     <form onSubmit={(e) => { this.userFormSubmitHandler(e) }}>
                         <div>
-                            <TextField type={"text"} title={"Enter Name"} value={this.state.newuser.name} name={"userName"} placeholder={"Enter Name"} 
-                                 handleChange={ e=>this.userNameHandler(e) }
+                            <TextField type={"text"} title={"Enter Name"} value={this.state.newuser.name} name={"userName"} placeholder={"Enter Name"}
+                                handleChange={e => this.userNameHandler(e)}
                             />
-                            <TextField type={"text"} title={"Enter Email"} value={this.state.newuser.email} name={"emailAddress"} placeholder={"Enter Email"} 
-                                handleChange={ e=> this.userEmailHandler(e)}
+                            <TextField type={"text"} title={"Enter Email"} value={this.state.newuser.email} name={"emailAddress"} placeholder={"Enter Email"}
+                                handleChange={e => this.userEmailHandler(e)}
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit" disabled={this.state.isDisable} className="btn btn-primary">Submit</button>
 
                     </form>
                 </div>
@@ -59,20 +66,14 @@ class UserForm extends React.Component {
 
     }
 }
-const mapStateToProps = state => {
-    return {
-      users: state.users
-    };
-  };
-
 const mapDispatchToProps = dispatch => {
     return {
-      userFormSubmit: user => {
-        dispatch(addNewUser(user));
-      }
+        userFormSubmit: user => {
+            dispatch(addNewUser(user));
+        }
     };
-  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(UserForm);
+export default connect(null, mapDispatchToProps)(UserForm);
 
 

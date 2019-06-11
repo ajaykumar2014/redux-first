@@ -4,10 +4,15 @@ import uuidv4 from 'uuid/v4';
 export const addNewUser = (user) =>{
     return {
         type:"NEW_USER",payload:{
-            id:uuidv4(),
+            id:user.id,
             name:user.name,
             email:user.email    
         }
+    }
+}
+export const removeRow = (rowId) =>{
+    return {
+        type:"REMOVE_ROW",rowId
     }
 }
 
