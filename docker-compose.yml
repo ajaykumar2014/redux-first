@@ -1,0 +1,17 @@
+--- 
+services: 
+
+  sample: 
+    build: 
+      context: "."
+      dockerfile: Dockerfile
+#    container_name: redux-first
+    environment: 
+      - NODE_ENV=development
+    ports: 
+      - "3001:3000"
+    volumes: 
+      - ".:/app"
+      - /app/node_modules
+version: '3.7'
+

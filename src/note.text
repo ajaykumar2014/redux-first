@@ -1,0 +1,25 @@
+postNotes(notes) {
+        console.log(notes);
+
+        let saveNotes = {
+            accountAgencyId: "2341234",
+            notes: notes,
+            actionCode: "INBOUND"
+        }
+        let events = [];
+        events.push(saveNotes);
+        let saveNotesEvent = {
+            events: events
+        }
+        //application/json;charset=UTF-8
+        fetch('http://localhost:9000/consumer-servicing-api/fw/cat-automate-actions/savenotes', {
+            method: 'POST',
+            body: JSON.stringify(saveNotesEvent),
+            headers: {
+                'Accept': 'application/json;charset=UTF-8',
+                'Content-Type':'application/json;charset=UTF-8'
+            }
+        }).then(res => {
+            console.log(res)
+        })
+    }
